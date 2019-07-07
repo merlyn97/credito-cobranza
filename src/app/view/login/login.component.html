@@ -1,0 +1,21 @@
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <img src="../../assets/logo.jpg" class="img-responsive" alt="Logo"/>
+                </div>
+            </div>
+
+    <input [(ngModel)]="email"  placeholder="Usuario" type="email" class="form-control">
+    <input [(ngModel)]="password" placeholder="password" type="password" class="form-control">
+    <button (click)="login()" type="button" class="btn btn-primary btn-lg btn-block">Login</button>
+
+    <div *ngIf="log">
+        <label>Cargando...</label>
+    </div> 
+</div>

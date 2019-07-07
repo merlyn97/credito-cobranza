@@ -1,0 +1,22 @@
+.fl{
+    border: 2px solid #000;
+}
+
+.logout{
+    position: relative;
+    left: 80%;
+    bottom: 20px;
+}
+
+.cont-load{
+    width: 10%;
+    position: relative;
+    left: 40%;
+    background: rgb(50, 223, 73);
+    color: #fff;
+    font-weight:bold;
+}
+
+.load{
+    font-size: 16px;
+}

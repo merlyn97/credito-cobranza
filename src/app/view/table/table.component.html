@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-12 text-center">
+        <img src="../../assets/logo.jpg" class="img-responsive" alt="Logo"/>
+    </div>
+</div>
+<button (click)="logout()"  class="logout btn btn-danger">Cerrar sesion</button>
+<button (click)='mostrarTabla()'>Mostrar tabla</button>
+        <div *ngIf="cargando" class="cont-load">
+           <label class="load">Cargando...</label> 
+        </div>
+    <div>
+        <table class="table">
+           <thead class="thead-dark">
+                <th scope="col" *ngFor="let cab of cabeceras">
+                    {{cab}}
+                </th>
+           </thead>
+            
+            <tr *ngFor="let parce of Parcelas; let i = index">
+                <td class="fl" *ngFor="let arr of parce; let j = index"> 
+                    {{arr}} 
+                    <div *ngIf="j == 27" id="cajaPadre">
+                        <input  placeholder="Pesos (00 M.N. 00/100)" type="text">
+                        <button (click)="saveMoney(j)" class="btn btn-success">Guardar</button>
+                    </div>
+
+                    <div *ngIf="j == 28">
+                            <input  type="text" placeholder="Bultos">
+                            <button (click)="saveLumps(j)" class="btn btn-success">Guardar</button>
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+    </div>
