@@ -14,6 +14,7 @@ import { from } from 'rxjs';
 
 export class TableComponent implements OnInit{
     cabeceras: any=[];
+    totalRecords:number;
     public Parcelas:any=[];
   public cargando:boolean;
   public money:any;
@@ -26,18 +27,50 @@ export class TableComponent implements OnInit{
         this.money=0;
         this.lumps=0;
         this.var = "id";
+        this.totalRecords=0;
     }
 
       ngOnInit() {
     
     }
 
-    saveMoney(index){
-        console.log(index + this.money);
+    async saveMoney(fila,columna){
+        console.log("INDEX ROW",fila);
+        console.log("INDEX COL",columna);
+        let input =  (<HTMLInputElement>document.getElementById(`${fila}-${columna}`)).value;
+        let button:any=document.getElementById(`${fila}-MXN-${columna}`);
+        button.disabled=true;
+        console.log(input);
+        this.Parcelas[fila][columna] = input;
+        if(this.Parcelas[fila][columna+1].toLowerCase()!="actualizacion"){
+            console.log("Actualizacion");
+            
+            let token = await this.firebaseAuthService.getToken();
+            let metaData = await this.firebaseAuthService.getMetadata();
+            let userInfo:any = await this.sumagroAppService.getInfo(token,metaData.uid);
+            let response = await this.sumagroAppService.updateRecord(token,fila+1,this.Parcelas[fila],userInfo.ingenioId);
+            console.log("LLAMADO A SERVICIO:",response)
+        }
+        
     }
 
-    saveLumps(index){
-        console.log(this.lumps);
+    async saveLumps(fila,columna){
+        console.log("INDEX ROW",fila);
+        console.log("INDEX COL",columna);
+        let button:any=document.getElementById(`${fila}-BULTOS-${columna}`);
+        button.disabled=true;
+        let input =  (<HTMLInputElement>document.getElementById(`${fila}-${columna}`)).value;
+        console.log(input);
+        this.Parcelas[fila][columna] = input;
+        if(this.Parcelas[fila][columna-1].toLowerCase()!="actualizacion"){
+            console.log("Actualizacion");
+            
+            let token = await this.firebaseAuthService.getToken();
+            let metaData = await this.firebaseAuthService.getMetadata();
+            let userInfo:any = await this.sumagroAppService.getInfo(token,metaData.uid);
+            let response = await this.sumagroAppService.updateRecord(token,fila+1,this.Parcelas[fila],userInfo.ingenioId);
+            console.log("LLAMADO A SERVICIO:",response)
+        }
     }
 
     async  mostrarTabla(){
@@ -57,6 +90,9 @@ export class TableComponent implements OnInit{
                 console.log(JSON.stringify(data));
                 for(let i=1; i<data.length; i++){
                     this.Parcelas.push(data[i]);
+                    if((data[i][27]).toLowerCase()!="Pesos 2"){
+                        this.totalRecords=this.totalRecords+1;
+                    }
                 }       
                 this.cabeceras=data[0];
                 this.cargando=false;

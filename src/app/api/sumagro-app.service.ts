@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class SumagroAppService {
 
 
-  endpoint = "https://us-central1-sumagro-backend.cloudfunctions.net/app";
+  endpoint = "http://localhost:5001/sumagro-backend/us-central1/app";
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'applicaton/json'
@@ -37,5 +37,21 @@ export class SumagroAppService {
     return this.http.get(`${this.endpoint}/sumagro-app/database/${ingenioId}`, this.options);
     }
 
+    updateRecord(token,row,inputs,ingenioId){
+      this.options.headers=new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': token
+      })
+      let request = {
+        row,
+        inputs
+      }
+      console.log(request.inputs);
+      return new Promise((resolve,reject)=>{
+        this.http.put(`${this.endpoint}/sumagro-app/update-database/ingenio/${ingenioId}`,JSON.stringify(request),this.options
+        ).subscribe(data=>resolve(data));
+      })
+
+    }
 
 }

@@ -5,6 +5,7 @@
 </div>
 <button (click)="logout()"  class="logout btn btn-danger">Cerrar sesion</button>
 <button (click)='mostrarTabla()'>Mostrar tabla</button>
+<label>Registros pendientes de financiar: {{totalRecords}}</label>
         <div *ngIf="cargando" class="cont-load">
            <label class="load">Cargando...</label> 
         </div>
@@ -20,13 +21,14 @@
                 <td class="fl" *ngFor="let arr of parce; let j = index"> 
                     {{arr}} 
                     <div *ngIf="j == 27" id="cajaPadre">
-                        <input  placeholder="Pesos (00 M.N. 00/100)" type="text">
-                        <button (click)="saveMoney(j)" class="btn btn-success">Guardar</button>
+                        <input  placeholder="Pesos (00 M.N. 00/100)" type="text" id="{{i+'-'+j}}">
+                        <button *ngIf="(Parcelas[i][j]).toLowerCase()=='actualizacion'" (click)="saveMoney(i,j)"  id="{{i+'-MXN-'+j}}" class="btn btn-success">Guardar</button>
                     </div>
 
                     <div *ngIf="j == 28">
-                            <input  type="text" placeholder="Bultos">
-                            <button (click)="saveLumps(j)" class="btn btn-success">Guardar</button>
+                            <input  type="text" placeholder="Bultos" id="{{i+'-'+j}}">
+
+                            <button *ngIf="(Parcelas[i][j]).toLowerCase()=='actualizacion'" (click)="saveLumps(i,j)" id="{{i+'-BULTOS-'+j}}" class="btn btn-success">Guardar</button>
                     </div>
                 </td>
 
