@@ -16,7 +16,7 @@ export class FirebaseAuthService {
       firebase.auth().signInWithEmailAndPassword(value.email, value.password)
       .then(
         res=>{
-          localStorage.setItem('token', res['user']['refreshToken'])
+ 
           resolve(res)},
         err=>reject(err))
     })

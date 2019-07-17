@@ -5,8 +5,8 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { NgxLoadingModule } from 'ngx-loading';
 export const firebaseConfig = {
   apiKey: "AIzaSyD5DCPHsQRgQExi3730nnMsh6f9eq6938c",
   authDomain: "sumagro-backend.firebaseapp.com",
@@ -22,8 +22,8 @@ export const firebaseConfig = {
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    BrowserModule,SweetAlert2Module.forRoot(),
+    AppRoutingModule,NgxLoadingModule.forRoot({}),
     HttpClientModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],

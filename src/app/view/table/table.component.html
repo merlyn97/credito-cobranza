@@ -22,13 +22,13 @@
                     {{arr}} 
                     <div *ngIf="j == 27" id="cajaPadre">
                         <input  placeholder="Pesos (00 M.N. 00/100)" type="text" id="{{i+'-'+j}}">
-                        <button *ngIf="(Parcelas[i][j]).toLowerCase()=='actualizacion'" (click)="saveMoney(i,j)"  id="{{i+'-MXN-'+j}}" class="btn btn-success">Guardar</button>
+                        <button *ngIf="(Parcelas[i][j]).toLowerCase()=='actualizando' || (Parcelas[i][j]).toLowerCase()==''" (click)="saveMoney(i,j)"  id="{{i+'-MXN-'+j}}" class="btn btn-success">Guardar</button>
                     </div>
 
                     <div *ngIf="j == 28">
                             <input  type="text" placeholder="Bultos" id="{{i+'-'+j}}">
 
-                            <button *ngIf="(Parcelas[i][j]).toLowerCase()=='actualizacion'" (click)="saveLumps(i,j)" id="{{i+'-BULTOS-'+j}}" class="btn btn-success">Guardar</button>
+                            <button *ngIf="(Parcelas[i][j]).toLowerCase()=='actualizando' || (Parcelas[i][j]).toLowerCase()==''" (click)="saveLumps(i,j)" id="{{i+'-BULTOS-'+j}}" class="btn btn-success">Guardar</button>
                     </div>
                 </td>
 

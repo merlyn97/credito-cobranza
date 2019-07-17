@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class SumagroAppService {
 
 
-  endpoint = "http://localhost:5001/sumagro-backend/us-central1/app";
+  endpoint = "https://us-central1-sumagro-backend.cloudfunctions.net/app";
   options = {
     headers: new HttpHeaders({
       'Content-Type': 'applicaton/json'

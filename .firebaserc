@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "sumagro-backend"
+  },
+  "targets": {
+    "sumagro-backend": {
+      "hosting": {
+        "cred-cob": [
+          "credito-cobranza"
+        ]
+      }
+    }
+  }
+}

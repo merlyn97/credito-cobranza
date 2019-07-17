@@ -19,3 +19,10 @@
         <label>Cargando...</label>
     </div> 
 </div>
+<swal
+  #errorAccess
+  title="Acceso denegado"
+  text="Usuario no autorizado"
+  type="error">
+</swal>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading>

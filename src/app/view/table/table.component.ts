@@ -35,62 +35,63 @@ export class TableComponent implements OnInit{
     }
 
     async saveMoney(fila,columna){
-        console.log("INDEX ROW",fila);
-        console.log("INDEX COL",columna);
+        
         let input =  (<HTMLInputElement>document.getElementById(`${fila}-${columna}`)).value;
         let button:any=document.getElementById(`${fila}-MXN-${columna}`);
         button.disabled=true;
-        console.log(input);
+
         this.Parcelas[fila][columna] = input;
-        if(this.Parcelas[fila][columna+1].toLowerCase()!="actualizacion"){
-            console.log("Actualizacion");
+
+           
             
             let token = await this.firebaseAuthService.getToken();
             let metaData = await this.firebaseAuthService.getMetadata();
             let userInfo:any = await this.sumagroAppService.getInfo(token,metaData.uid);
             let response = await this.sumagroAppService.updateRecord(token,fila+1,this.Parcelas[fila],userInfo.ingenioId);
-            console.log("LLAMADO A SERVICIO:",response)
-        }
+           
+        
         
     }
 
     async saveLumps(fila,columna){
-        console.log("INDEX ROW",fila);
-        console.log("INDEX COL",columna);
+        
         let button:any=document.getElementById(`${fila}-BULTOS-${columna}`);
         button.disabled=true;
         let input =  (<HTMLInputElement>document.getElementById(`${fila}-${columna}`)).value;
-        console.log(input);
+      
         this.Parcelas[fila][columna] = input;
-        if(this.Parcelas[fila][columna-1].toLowerCase()!="actualizacion"){
-            console.log("Actualizacion");
+        
+         
             
             let token = await this.firebaseAuthService.getToken();
             let metaData = await this.firebaseAuthService.getMetadata();
             let userInfo:any = await this.sumagroAppService.getInfo(token,metaData.uid);
             let response = await this.sumagroAppService.updateRecord(token,fila+1,this.Parcelas[fila],userInfo.ingenioId);
-            console.log("LLAMADO A SERVICIO:",response)
-        }
+         
+        
     }
 
     async  mostrarTabla(){
-        console.log('Muestra tabla');
+       
         this.cargando=true;
         let token="";
         if(localStorage.getItem('token') == null){
              token= await this.firebaseAuthService.getToken();
-         
+             
         }else{
             token = localStorage.getItem('token');
         }   
             let metaData:any = await this.firebaseAuthService.getMetadata();
-            console.log(metaData);
+       
             let datosUsuarios:any =  await this.sumagroAppService.getInfo(token, metaData.uid);
+            if(datosUsuarios.rol!="CREDIT_COLLECTION"){
+                this.router.navigate(['/login'])
+            }
             await this.sumagroAppService.getParcelas(token, datosUsuarios.ingenioId).subscribe((data:any)=>{
-                console.log(JSON.stringify(data));
+         
                 for(let i=1; i<data.length; i++){
                     this.Parcelas.push(data[i]);
-                    if((data[i][27]).toLowerCase()!="Pesos 2"){
+                    if((data[i][27]).toLowerCase()!="actualizando"){
                         this.totalRecords=this.totalRecords+1;
                     }
                 }       
