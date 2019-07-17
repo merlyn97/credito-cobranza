@@ -4,14 +4,14 @@
     </div>
 </div>
 <button (click)="logout()"  class="logout btn btn-danger">Cerrar sesion</button>
-<button (click)='mostrarTabla()'>Mostrar tabla</button>
+<button (click)='mostrarTabla()' class="btn btn-success">Mostrar tabla</button>
 <label>Registros pendientes de financiar: {{totalRecords}}</label>
         <div *ngIf="cargando" class="cont-load">
            <label class="load">Cargando...</label> 
         </div>
     <div>
         <table class="table">
-           <thead class="thead-dark">
+           <thead class="table-success">
                 <th scope="col" *ngFor="let cab of cabeceras">
                     {{cab}}
                 </th>
